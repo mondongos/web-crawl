@@ -7,6 +7,17 @@ class WebCrawler {
         this._staticAssets = []
     }
 
+    async parseHTML(pageURL) {
+        try {
+            let response = this.fetchPage(pageURL)
+            let parsedHTMLPromise = await response.then((res) => res.text())
+            let results = await parsedHTMLPromise;
+            return results
+        } catch(err) {
+            console.log(err)
+        }
+    }
+
     async fetchPage(pageURL) {
         try {
             let fetchOptions = {

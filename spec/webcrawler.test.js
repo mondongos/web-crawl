@@ -25,5 +25,11 @@ describe('Web Crawler', () => {
             let pageData = await webcrawler.fetchPage("https://www.four-seasons-ventures.com/")
             expect(pageData.status).toEqual(200)
         })
+
+        test('parse HTML', async () => {
+            expect.assertions(1)
+            let html =  await webcrawler.parseHTML("https://www.four-seasons-ventures.com/")
+            expect(html.substring(0,15)).toEqual("<!doctype html>")
+        })
     })
 })
