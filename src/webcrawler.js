@@ -1,15 +1,44 @@
 const fetch = require('node-fetch')
 const cheerio = require('cheerio')
-var urlParse = require('url-parse');
+const urlParse = require('url-parse');
 const lodash = require('lodash')
 
 class WebCrawler {
     constructor(url) {
+        this._pagesCrawled = 0
         this._startingURL = url
         this._urlQueue = [{url: this._startingURL, visited: false}]
         this._staticAssets = []
     }
 
+    async runWebCrawler() {
+        for (var i=0; i < this._urlQueue.length; i++) {
+            try {
+                if (this._urlQueue[i].visited === false) {
+                    this._pagesCrawled += 1
+                    console.log("Crawling page " + this._pagesCrawled)
+                    let pagehtml = await this.parseHTML(this._urlQueue[i].url)
+                    let newPages = this.removeInvalidAndDups(this.findHrefs(pagehtml))
+                    this.addToQueue(newPages)
+                    this._urlQueue[i].visited = true
+                    let assets = this.getAssets(pagehtml)
+                    this._staticAssets.push(this.generateAssetsObject(this._urlQueue[i].url, assets))
+                }
+            } catch(err) {
+                console.log(err)
+            }
+        }
+        try { 
+            console.log(this._staticAssets)
+            return this._staticAssets
+        } catch(err) {
+            console.log(err)
+        }
+    }
+
+    generateAssetsObject(url, assets) {
+        return {url: url, assets: assets}
+    }
 
     getAssets(html) {
         let imageAssets = this.getImages(html)
@@ -107,7 +136,6 @@ class WebCrawler {
             console.log(err)
         }
     }
-
 }
 
 module.exports = {WebCrawler}

@@ -250,5 +250,22 @@ describe('Web Crawler', () => {
         
     })
 
+    describe('Adding assets to JSON array', () => {
+
+        test('add assets to static assets array', async () => {
+            expect.assertions(2)
+            jest.setTimeout(15000)
+            let expected = [
+                {
+                    url: expect.any(String), 
+                    assets: expect.any(Array)
+                }
+            ]
+            let results = await webcrawler.runWebCrawler()
+            expect(results).toEqual(expect.arrayContaining(expected))
+            expect(results.length).toBeGreaterThan(1)
+        })
+    })
+
 
 })
