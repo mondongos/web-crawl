@@ -10,6 +10,16 @@ class WebCrawler {
         this._staticAssets = []
     }
 
+    getScripts(html) {
+        let scripts = []
+        let $ = cheerio.load(html)
+        $('script').each((index, value) => {
+            let script = $(value).attr('src')
+            scripts.push(script)
+        })
+        return scripts
+    }
+
     getImages(html) {
         let images = []
         let $ = cheerio.load(html)
@@ -81,7 +91,7 @@ class WebCrawler {
             console.log(err)
         }
     }
-    
+
 }
 
 module.exports = {WebCrawler}

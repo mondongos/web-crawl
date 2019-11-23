@@ -158,5 +158,22 @@ describe('Web Crawler', () => {
                 'https://www.four-seasons-ventures.com/wp-content/themes/fourseason/images/p1c.png'
             ])
         })
+        
+        test('Get scripts from page', async () => {
+            let html = await webcrawler.parseHTML("https://www.four-seasons-ventures.com/")
+            expect(webcrawler.getScripts(html)).toEqual([ 
+                undefined,
+                undefined,
+                'https://www.four-seasons-ventures.com/wp-content/themes/fourseason/js/jquery.min.js?ver=20180710',
+                'https://www.four-seasons-ventures.com/wp-content/themes/fourseason/js/bootstrap.min.js?ver=20180710',
+                'https://www.four-seasons-ventures.com/wp-content/themes/fourseason/js/slick.js?ver=20180710',
+                'https://www.four-seasons-ventures.com/wp-content/themes/fourseason/js/slick.min.js?ver=20180710',
+                'https://www.four-seasons-ventures.com/wp-content/themes/fourseason/js/custom.js?ver=20180710',
+                'https://www.four-seasons-ventures.com/wp-includes/js/wp-embed.min.js?ver=4.9.12'
+            ])
+        })
+        
     })
+
+
 })
