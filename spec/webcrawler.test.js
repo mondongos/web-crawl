@@ -21,13 +21,11 @@ describe('Web Crawler', () => {
     describe('fetch page', () => {
         
         test('fetches page successfully', async () => {
-            expect.assertions(1)
             let pageData = await webcrawler.fetchPage("https://www.four-seasons-ventures.com/")
             expect(pageData.status).toEqual(200)
         })
 
         test('parse HTML', async () => {
-            expect.assertions(1)
             let html =  await webcrawler.parseHTML("https://www.four-seasons-ventures.com/")
             expect(html.substring(0,15)).toEqual("<!doctype html>")
         })
@@ -36,7 +34,6 @@ describe('Web Crawler', () => {
     describe('URL spider', () => {
 
         test('find hyperlinks within HTML', async () => {
-            expect.assertions(1)
             let html = await webcrawler.parseHTML("https://www.four-seasons-ventures.com/")
             expect(webcrawler.findHrefs(html)).toEqual([
                 'https://www.four-seasons-ventures.com/',
@@ -57,5 +54,25 @@ describe('Web Crawler', () => {
                 'javascript:void(0);'
               ])
         })
+
+        test('Remove hyperlinks which are not part of starting', async () => {
+            let html = await webcrawler.parseHTML("https://www.four-seasons-ventures.com/")
+            let linksArr = webcrawler.findHrefs(html)
+            expect(webcrawler.removeInvalidAndDups(linksArr)).toEqual([
+                'https://www.four-seasons-ventures.com/',
+                'https://www.four-seasons-ventures.com/our-approach/',
+                'https://www.four-seasons-ventures.com/companies/',
+                'https://www.four-seasons-ventures.com/team/',
+                'https://www.four-seasons-ventures.com/news-views/',
+                'https://www.four-seasons-ventures.com/contact/',
+                'https://www.four-seasons-ventures.com/companies/',
+                'https://www.four-seasons-ventures.com/pomanda-launches-deal-room-at-the-london-business-show/',
+                'https://www.four-seasons-ventures.com/absolutely-couriers-adds-maydh-to-its-international-division/',
+                'https://www.four-seasons-ventures.com/welcome-john-maddox/',
+                'https://www.four-seasons-ventures.com/rebrand-as-absolutely/',
+                'https://www.four-seasons-ventures.com/lorem-ipsum-dolor-sit-amet-3/'
+            ])
+        })
+
     })
 })

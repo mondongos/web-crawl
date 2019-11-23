@@ -1,5 +1,7 @@
 const fetch = require('node-fetch')
 const cheerio = require('cheerio')
+var urlParse = require('url-parse');
+const lodash = require('lodash')
 
 class WebCrawler {
     constructor(url) {
@@ -8,24 +10,24 @@ class WebCrawler {
         this._staticAssets = []
     }
 
-    findHrefs(html) {
-        let urlList = []
-        let $ = cheerio.load(html)
-        $('a').each((index, value) => {
-            let link = $(value).attr('href')
-            urlList.push(link)
-        })
-        return urlList
+    removeInvalidAndDups(arr) {
+        let domain = new urlParse(this._startingURL).hostname
+        let validLinks = arr.filter(url => new urlParse(url).hostname === domain)
+        return this.removeDuplicates(validLinks)
+    }
+
+    removeDuplicates(arr) {
+        return lodash.sortedUniq(arr)
     }
 
     findHrefs(html) {
-        let urlList = []
+        let linksFound = []
         let $ = cheerio.load(html)
         $('a').each((index, value) => {
             let link = $(value).attr('href')
-            urlList.push(link)
+            linksFound.push(link)
         })
-        return urlList
+        return linksFound
     }
 
     async parseHTML(pageURL) {
