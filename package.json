@@ -1,0 +1,19 @@
+{
+  "name": "web-crawler",
+  "version": "1.0.0",
+  "description": "A web crawler which visits every reachable page for given URL and returns every static asset in JSON",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "Max Van Aken",
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^24.9.0"
+  },
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.3",
+    "lodash": "^4.17.15",
+    "node-fetch": "^2.6.0"
+  }
+}
