@@ -10,6 +10,17 @@ class WebCrawler {
         this._staticAssets = []
     }
 
+    getImages(html) {
+        let images = []
+        let $ = cheerio.load(html)
+        $('img').each((index, value) => {
+            let image = $(value).attr('src')
+            images.push(image)
+            console.log(image)
+        })
+        return images
+    }
+
     addToQueue(arr) {
         arr.forEach(item => {
             let array_of_strings = this._urlQueue.map(item => item.url);
@@ -22,6 +33,7 @@ class WebCrawler {
     removeInvalidAndDups(arr) {
         let domain = new urlParse(this._startingURL).hostname
         let validLinks = arr.filter(url => new urlParse(url).hostname === domain)
+        console.log(validLinks)
         return this.removeDuplicates(validLinks)
     }
 
@@ -69,6 +81,7 @@ class WebCrawler {
             console.log(err)
         }
     }
+    
 }
 
 module.exports = {WebCrawler}
