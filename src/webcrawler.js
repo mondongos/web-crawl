@@ -1,10 +1,31 @@
 const fetch = require('node-fetch')
+const cheerio = require('cheerio')
 
 class WebCrawler {
     constructor(url) {
         this._startingURL = url
         this._urlQueue = [{url: this._startingURL, visited: false}]
         this._staticAssets = []
+    }
+
+    findHrefs(html) {
+        let urlList = []
+        let $ = cheerio.load(html)
+        $('a').each((index, value) => {
+            let link = $(value).attr('href')
+            urlList.push(link)
+        })
+        return urlList
+    }
+
+    findHrefs(html) {
+        let urlList = []
+        let $ = cheerio.load(html)
+        $('a').each((index, value) => {
+            let link = $(value).attr('href')
+            urlList.push(link)
+        })
+        return urlList
     }
 
     async parseHTML(pageURL) {
