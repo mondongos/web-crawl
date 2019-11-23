@@ -14,6 +14,16 @@ describe('Web Crawler', () => {
                     url: "https://www.four-seasons-ventures.com/", 
                     visited: false
                 }
-            ])
+            ]
+        )
+    })
+
+    describe('fetch page', () => {
+        
+        test('fetches page successfully', async () => {
+            expect.assertions(1)
+            let pageData = await webcrawler.fetchPage("https://www.four-seasons-ventures.com/")
+            expect(pageData.status).toEqual(200)
+        })
     })
 })
