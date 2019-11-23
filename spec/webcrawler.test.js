@@ -158,7 +158,7 @@ describe('Web Crawler', () => {
                 'https://www.four-seasons-ventures.com/wp-content/themes/fourseason/images/p1c.png'
             ])
         })
-        
+
         test('Get scripts from page', async () => {
             let html = await webcrawler.parseHTML("https://www.four-seasons-ventures.com/")
             expect(webcrawler.getScripts(html)).toEqual([ 
@@ -170,6 +170,30 @@ describe('Web Crawler', () => {
                 'https://www.four-seasons-ventures.com/wp-content/themes/fourseason/js/slick.min.js?ver=20180710',
                 'https://www.four-seasons-ventures.com/wp-content/themes/fourseason/js/custom.js?ver=20180710',
                 'https://www.four-seasons-ventures.com/wp-includes/js/wp-embed.min.js?ver=4.9.12'
+            ])
+        })
+
+        test('Get external linked assets from page', async () => {
+            let html = await webcrawler.parseHTML("https://www.four-seasons-ventures.com/")
+            expect(webcrawler.getLinkedAssets(html)).toEqual([ 
+                'https://gmpg.org/xfn/11',
+                'https://www.four-seasons-ventures.com/',
+                '//s.w.org',
+                'https://www.four-seasons-ventures.com/feed/',
+                'https://www.four-seasons-ventures.com/comments/feed/',
+                'https://www.four-seasons-ventures.com/wp-content/themes/fourseason/css/bootstrap.min.css?ver=20180710',
+                'https://www.four-seasons-ventures.com/wp-content/themes/fourseason/font-awesome/css/font-awesome.min.css?ver=20180710',
+                'https://www.four-seasons-ventures.com/wp-content/themes/fourseason/css/slick.css?ver=20180710',
+                'https://www.four-seasons-ventures.com/wp-content/themes/fourseason/css/slick-theme.css?ver=20180710',
+                'https://www.four-seasons-ventures.com/wp-content/themes/fourseason/css/style.css?ver=20180710',
+                'https://www.four-seasons-ventures.com/wp-content/themes/fourseason/css/responsive.css?ver=20180710',
+                'https://www.four-seasons-ventures.com/wp-content/themes/fourseason/style.css?ver=4.9.12',
+                'https://www.four-seasons-ventures.com/wp-json/',
+                'https://www.four-seasons-ventures.com/xmlrpc.php?rsd',
+                'https://www.four-seasons-ventures.com/wp-includes/wlwmanifest.xml',
+                'https://www.four-seasons-ventures.com/',
+                'https://www.four-seasons-ventures.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.four-seasons-ventures.com%2F',
+                'https://www.four-seasons-ventures.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.four-seasons-ventures.com%2F&format=xml'
             ])
         })
         

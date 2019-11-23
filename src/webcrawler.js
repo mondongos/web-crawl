@@ -10,6 +10,21 @@ class WebCrawler {
         this._staticAssets = []
     }
 
+
+
+    
+
+    getLinkedAssets(html) {
+        let linked = []
+        let $ = cheerio.load(html)
+        $('link').each((index, value) => {
+            let link = $(value).attr('href')
+            linked.push(link)
+            console.log(link)
+        })
+        return linked
+    }
+
     getScripts(html) {
         let scripts = []
         let $ = cheerio.load(html)
