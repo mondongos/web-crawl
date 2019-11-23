@@ -11,8 +11,12 @@ class WebCrawler {
     }
 
 
-
-    
+    getAssets(html) {
+        let imageAssets = this.getImages(html)
+        let scriptAssets = this.getScripts(html)
+        let linkedAssets = this.getLinkedAssets(html)
+        return imageAssets.concat(scriptAssets, linkedAssets)
+    }
 
     getLinkedAssets(html) {
         let linked = []
@@ -20,7 +24,6 @@ class WebCrawler {
         $('link').each((index, value) => {
             let link = $(value).attr('href')
             linked.push(link)
-            console.log(link)
         })
         return linked
     }
@@ -41,7 +44,6 @@ class WebCrawler {
         $('img').each((index, value) => {
             let image = $(value).attr('src')
             images.push(image)
-            console.log(image)
         })
         return images
     }
@@ -58,7 +60,6 @@ class WebCrawler {
     removeInvalidAndDups(arr) {
         let domain = new urlParse(this._startingURL).hostname
         let validLinks = arr.filter(url => new urlParse(url).hostname === domain)
-        console.log(validLinks)
         return this.removeDuplicates(validLinks)
     }
 
