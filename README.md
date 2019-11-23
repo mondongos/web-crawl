@@ -32,3 +32,12 @@ The software is initalised with an empty array `_staticAssets` for asset objects
     ..
 ]
 ```
+
+### Technology 
+- JavaScript 
+- Node 
+    - node-fetch
+    - Cheerio
+    - url-parser
+    - Lodash 
+- Jest

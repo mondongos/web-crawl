@@ -10,6 +10,15 @@ class WebCrawler {
         this._staticAssets = []
     }
 
+    addToQueue(arr) {
+        arr.forEach(item => {
+            let array_of_strings = this._urlQueue.map(item => item.url);
+            if (array_of_strings.indexOf(item) === -1) {
+                this._urlQueue.push({url: item, visited: false})
+            }
+        })
+    }
+
     removeInvalidAndDups(arr) {
         let domain = new urlParse(this._startingURL).hostname
         let validLinks = arr.filter(url => new urlParse(url).hostname === domain)

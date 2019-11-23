@@ -74,5 +74,59 @@ describe('Web Crawler', () => {
             ])
         })
 
+        test('Check if URLs are in queue and add to queue', async () => {
+            expect.assertions(1)
+            let html = await webcrawler.parseHTML("https://www.four-seasons-ventures.com/")
+            let linksArr = webcrawler.findHrefs(html)
+            let filteredLinksArr = webcrawler.removeInvalidAndDups(linksArr)
+            webcrawler.addToQueue(filteredLinksArr)
+            expect(webcrawler._urlQueue).toEqual([
+                { 
+                    url: 'https://www.four-seasons-ventures.com/', 
+                    visited: false 
+                },
+                {
+                    url: 'https://www.four-seasons-ventures.com/our-approach/',
+                    visited: false
+                },
+                {
+                    url: 'https://www.four-seasons-ventures.com/companies/',
+                    visited: false
+                },
+                {
+                    url: 'https://www.four-seasons-ventures.com/team/',
+                    visited: false
+                },
+                {
+                    url: 'https://www.four-seasons-ventures.com/news-views/',
+                    visited: false
+                },
+                {
+                    url: 'https://www.four-seasons-ventures.com/contact/',
+                    visited: false
+                },
+                {
+                    url: 'https://www.four-seasons-ventures.com/pomanda-launches-deal-room-at-the-london-business-show/',
+                    visited: false
+                },
+                {
+                    url: 'https://www.four-seasons-ventures.com/absolutely-couriers-adds-maydh-to-its-international-division/',
+                    visited: false
+                },
+                {
+                    url: 'https://www.four-seasons-ventures.com/welcome-john-maddox/',
+                    visited: false
+                },
+                {
+                    url: 'https://www.four-seasons-ventures.com/rebrand-as-absolutely/',
+                    visited: false
+                },
+                {
+                    url: 'https://www.four-seasons-ventures.com/lorem-ipsum-dolor-sit-amet-3/',
+                    visited: false
+                }
+            ])
+        })
+
     })
 })
