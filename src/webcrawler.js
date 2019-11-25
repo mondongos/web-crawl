@@ -16,7 +16,7 @@ class WebCrawler {
             try {
                 if (this._urlQueue[i].visited === false) {
                     this._pagesCrawled += 1
-                    console.log("Crawling page " + this._pagesCrawled)
+                    console.log("Crawling page " + this._pagesCrawled + ": " + this._urlQueue[i].url)
                     let pagehtml = await this.parseHTML(this._urlQueue[i].url)
                     let newPages = this.removeInvalidAndDups(this.findHrefs(pagehtml))
                     this.addToQueue(newPages)
@@ -119,18 +119,7 @@ class WebCrawler {
 
     async fetchPage(pageURL) {
         try {
-            let fetchOptions = {
-                method: 'POST',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json;charset=UTF-8'
-                },
-                body: JSON.stringify({
-                    a: 10,
-                    b: 20
-                }) 
-            }
-            let response = await fetch(pageURL, fetchOptions)
+            let response = await fetch(pageURL)
             return response
         } catch(err) {
             console.log(err)

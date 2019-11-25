@@ -16,7 +16,7 @@ The software is initalised with an empty array `_staticAssets` for asset objects
 1. Clone this repository
 2. Run `npm install` to install all necessary libraries
 3. Run `node src/run.js` into the command line
-4. When prompted, type in the absolute URL you'd like to crawl.
+4. When prompted, type in the *absolute URL* you'd like to crawl.
 
 ### Example output
 ```
@@ -58,3 +58,7 @@ I need to mock my unit tests because, in their current state, many of the tests 
 
 Note: testing takes some time because the async callbacks. When testing the `runWebCrawler` method, I had to `setTimeout` at 15 seconds as Jest has a default timeout of 5 seconds. 
 
+### Notes 
+- Mock tests 
+- Fix 400 error - something to do with request in fetchPage()
+- Parse URL to absolute before running 
