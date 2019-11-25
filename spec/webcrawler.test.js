@@ -54,7 +54,6 @@ describe('Web Crawler', () => {
             webcrawler.addToQueue(filteredLinksArr)
             expect(webcrawler._urlQueue.length).toEqual(filteredLinksArr.length - 1)
         })
-
     })
 
     describe('Building static assets', () => {
@@ -103,6 +102,4 @@ describe('Web Crawler', () => {
             expect(results.length).toBeGreaterThan(1)
         })
     })
-
-
 })
