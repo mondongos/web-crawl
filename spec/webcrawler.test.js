@@ -87,7 +87,7 @@ describe('Web Crawler', () => {
         
     })
 
-    describe('Adding assets to JSON array', () => {
+    describe('Adding assets to array', () => {
 
         test('add assets to static assets array', async () => {
             expect.assertions(2)

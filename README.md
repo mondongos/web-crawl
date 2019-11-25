@@ -16,7 +16,7 @@ The software is initalised with an empty array `_staticAssets` for asset objects
 1. Clone this repository
 2. Run `npm install` to install all necessary libraries
 3. Run `node src/run.js` into the command line
-4. When prompted, type in the *absolute URL* you'd like to crawl.
+4. When prompted, type in the **absolute URL** you'd like to crawl.
 
 ### Example output
 ```
@@ -52,9 +52,7 @@ The software is initalised with an empty array `_staticAssets` for asset objects
 ### Testing
 Run unit tests by running `npm run test`. 
 
-I felt it was important to test on a real site to begin with. I picked the website for [Four Seasons Ventures](https://www.four-seasons-ventures.com/) for my tests because it's a small site, I know the people who own it and I know its not going to change much.  
-
-I need to mock my unit tests because, in their current state, many of the tests would break if changes were made to the website. 
+I picked the website for [Four Seasons Ventures](https://www.four-seasons-ventures.com/) for my tests because it's a small site, I know the people who own it and I know its not going to change much.  
 
 Note: testing takes some time because the async callbacks. When testing the `runWebCrawler` method, I had to `setTimeout` at 15 seconds as Jest has a default timeout of 5 seconds. 
 
