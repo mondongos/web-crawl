@@ -55,8 +55,3 @@ Run unit tests by running `npm run test`.
 I picked the website for [Four Seasons Ventures](https://www.four-seasons-ventures.com/) for my tests because it's a small site, I know the people who own it and I know its not going to change much.  
 
 Note: testing takes some time because the async callbacks. When testing the `runWebCrawler` method, I had to `setTimeout` at 15 seconds as Jest has a default timeout of 5 seconds. 
-
-### Notes 
-- Mock tests 
-- Fix 400 error - something to do with request in fetchPage()
-- Parse URL to absolute before running 
